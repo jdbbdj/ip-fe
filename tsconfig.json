@@ -1,6 +1,18 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    //allow imports without default declaration
+    "allowSyntheticDefaultImports": true,
+    //declare the jsx to be react-native
+    "jsx": "react-native",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    //for future pipeline purposes
+    "noEmit": true,
+    //to skip checking .d.ts files
+    "skipLibCheck": true,
+    // enable TypeScript to import JSON files as modules.
+    "resolveJsonModule": true
   }
 }
