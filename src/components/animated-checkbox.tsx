@@ -23,7 +23,7 @@ const AnimatedCheckbox = () => {
         stroke-width="2"
       />
       <Path
-        d="M15 12.3198L15 21C30.7345 5.36718 45 -0.0517492 50 2.67531"
+        d="M15 12.3198 L 15 21 C 34 10 42 -3 50 2.6753"
         stroke="black"
         stroke-width="3"
       />
