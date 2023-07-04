@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Text,
   Box,
@@ -11,15 +11,15 @@ import {
   useColorMode,
   useColorModeValue,
   ZStack
-} from "native-base";
-import { SvgUri } from "react-native-svg";
+} from 'native-base';
+import { SvgUri } from 'react-native-svg';
 
 const Login = () => {
   return (
-    <Center _dark={{ bg: "blueGray.900" }} _light={{ bg: "blue.50" }} flex={1}>
+    <Center _dark={{ bg: 'blueGray.900' }} _light={{ bg: 'blue.50' }} flex={1}>
       <VStack space={20}>
         <Image
-          source={require("../assets/book.png")}
+          source={require('../assets/book.png')}
           alt="Alternate Text"
           width={300}
           height={300}
@@ -31,13 +31,13 @@ const Login = () => {
       </VStack>
       <View
         style={{
-          position: "absolute",
+          position: 'absolute',
           bottom: 0,
-          width: "100%",
+          width: '100%',
           height: 400,
           borderTopRightRadius: 40,
           borderTopLeftRadius: 40,
-          backgroundColor: "#767386",
+          backgroundColor: '#767386',
           zIndex: -999
         }}
       />

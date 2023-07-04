@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Text,
   Box,
@@ -8,21 +8,22 @@ import {
   useColorMode,
   //for color values first argument for initiated mode
   useColorModeValue
-} from "native-base";
+} from 'native-base';
 
 //button
-import ThemeToggle from "../components/theme-toggle";
-import AnimatedCheckbox from "../components/animated-checkbox";
-
+import ThemeToggle from '../components/theme-toggle';
+import AnimatedCheckbox from '../components/animated-checkbox';
+import BoxShake from '../components/button-shake';
 const MainScreen = () => {
   return (
-    <Center _dark={{ bg: "blueGray.900" }} _light={{ bg: "blue.50" }} flex={1}>
+    <Center _dark={{ bg: 'blueGray.900' }} _light={{ bg: 'blue.50' }} flex={1}>
       <VStack space={5} alignItems="center">
         <Box w="100px" h="100px">
+          <BoxShake />
           <AnimatedCheckbox />
         </Box>
-        <Box p={10} bg={useColorModeValue("red.500", "yellow.500")}>
-          <Text color={useColorModeValue("white", "black")}>Hello</Text>
+        <Box p={10} bg={useColorModeValue('red.500', 'yellow.500')}>
+          <Text color={useColorModeValue('white', 'black')}>Hello</Text>
         </Box>
         <ThemeToggle />
       </VStack>
