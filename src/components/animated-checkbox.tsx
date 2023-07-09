@@ -8,6 +8,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import Svg, { Path, Defs, ClipPath, G, Rect } from 'react-native-svg';
 
+import AnimatedStroke from './animated-stroke';
+
 const MARGIN = 15;
 const vWidth = 64 + MARGIN;
 const vHeight = 64 + MARGIN;
@@ -21,20 +23,19 @@ const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 interface Props {
   checked?: boolean;
+  highlightColor: string;
+  checkmarkColor: string;
+  boxOutlineColor: string;
 }
 
 const AnimatedCheckbox = (props: Props) => {
-  const { checked } = props;
-
-  const checkMarkColor = '#000000';
-  const highlightColor = '#ff0000';
-  const boxOutlineColor = '#000000';
+  const { checked, highlightColor, checkmarkColor, boxOutlineColor } = props;
 
   const progress = useSharedValue(0);
 
   useEffect(() => {
     progress.value = withTiming(checked ? 1 : 0, {
-      duration: 500,
+      duration: checked ? 500 : 200,
       easing: Easing.linear
     });
   }, [checked]);
@@ -70,12 +71,14 @@ const AnimatedCheckbox = (props: Props) => {
         animatedProps={animatedBoxProps}
       />
 
-      <AnimatedPath
+      <AnimatedStroke
+        progress={progress}
         d={checkmarkPath}
-        strokeWidth={3}
+        stroke={checkmarkColor}
+        strokeWidth={6}
         strokeLinejoin="round"
         strokeLinecap="round"
-        animatedProps={animatedBoxProps}
+        strokeOpacity={checked || false ? 1 : 0}
       />
     </Svg>
   );
