@@ -10,11 +10,9 @@ import {
   useColorModeValue
 } from 'native-base';
 
-import { Pressable } from 'react-native';
-
 //button
 import ThemeToggle from '../components/theme-toggle';
-import AnimatedCheckbox from '../components/animated-checkbox';
+import AnimatedTaskLabel from '../components/animated-task-label';
 import BoxShake from '../components/button-shake';
 import TaskItem from '../components/task-item';
 const MainScreen = () => {
@@ -30,6 +28,7 @@ const MainScreen = () => {
         <Box w="100px" h="100px">
           <BoxShake />
         </Box>
+
         <TaskItem onToggleCheckBox={handlePressCheckBox} isDone={clicked} />
         <Box p={10} bg={useColorModeValue('red.500', 'yellow.500')}>
           <Text color={useColorModeValue('white', 'black')}>Hello</Text>
