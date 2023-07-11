@@ -24,12 +24,16 @@ const MainScreen = () => {
 
   return (
     <Center _dark={{ bg: 'blueGray.900' }} _light={{ bg: 'blue.50' }} flex={1}>
-      <VStack space={5} alignItems="center">
+      <VStack space={5} alignItems="center" w="full">
         <Box w="100px" h="100px">
           <BoxShake />
         </Box>
 
-        <TaskItem onToggleCheckBox={handlePressCheckBox} isDone={clicked} />
+        <TaskItem
+          onToggleCheckBox={handlePressCheckBox}
+          isDone={clicked}
+          subject="Task"
+        />
         <Box p={10} bg={useColorModeValue('red.500', 'yellow.500')}>
           <Text color={useColorModeValue('white', 'black')}>Hello</Text>
         </Box>
