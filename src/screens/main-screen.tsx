@@ -15,9 +15,11 @@ import ThemeToggle from '../components/theme-toggle';
 import AnimatedTaskLabel from '../components/animated-task-label';
 import BoxShake from '../components/button-shake';
 import TaskItem from '../components/task-item';
+
 const MainScreen = () => {
   const [clicked, setClicked] = useState<boolean>(false);
-
+  const [subject, setSubject] = useState<string>('Task Item');
+  const [editing, setEditing] = useState<boolean>(false);
   const handlePressCheckBox: () => void = useCallback(() => {
     setClicked(prev => !prev);
   }, []);
@@ -32,7 +34,11 @@ const MainScreen = () => {
         <TaskItem
           onToggleCheckBox={handlePressCheckBox}
           isDone={clicked}
-          subject="Task"
+          subject={subject}
+          isEditing={editing}
+          onPressLabel={() => setEditing(true)}
+          onFinishEditing={() => setEditing(false)}
+          onChangeSubject={setSubject}
         />
         <Box p={10} bg={useColorModeValue('red.500', 'yellow.500')}>
           <Text color={useColorModeValue('white', 'black')}>Hello</Text>

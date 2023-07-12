@@ -3,6 +3,7 @@ import Login from './screens/login';
 import MainScreen from './screens/main-screen';
 
 import AppContainer from './components/app-container';
+
 const Tab = createBottomTabNavigator();
 
 const MyTabs = () => {
