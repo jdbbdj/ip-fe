@@ -5,14 +5,18 @@ import {
   Center,
   VStack,
   //for color values first argument for initiated mode
-  useColorModeValue
+  useColorModeValue,
+  Fab,
+  Icon
 } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
+
 import { demo_data } from '../utils/data';
 //button
 import ThemeToggle from '../components/theme-toggle';
 import BoxShake from '../components/button-shake';
 import TaskList from '../components/task-list';
+import shortid from 'shortid';
 
 interface TaskItemData {
   id: string;
@@ -96,6 +100,26 @@ const MainScreen = () => {
         </Box>
         <ThemeToggle />
       </VStack>
+      <Fab
+        position="absolute"
+        renderInPortal={false}
+        size="sm"
+        icon={<Icon color="white" as={<AntDesign name="plus" />} />}
+        colorScheme={useColorModeValue('blue', 'darkBlue')}
+        bg={useColorModeValue('blue.500', 'blue.400')}
+        onPress={() => {
+          const id = shortid.generate();
+          setData([
+            {
+              id,
+              subject: '',
+              done: false
+            },
+            ...data
+          ]);
+          setEditingItemId(id);
+        }}
+      />
     </Center>
   );
 };
