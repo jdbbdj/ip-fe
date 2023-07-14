@@ -4,24 +4,75 @@ import {
   Box,
   Center,
   VStack,
-  themeTools,
-  useColorMode,
   //for color values first argument for initiated mode
   useColorModeValue
 } from 'native-base';
-
+import { AntDesign } from '@expo/vector-icons';
+import { demo_data } from '../utils/data';
 //button
 import ThemeToggle from '../components/theme-toggle';
-import AnimatedTaskLabel from '../components/animated-task-label';
 import BoxShake from '../components/button-shake';
-import TaskItem from '../components/task-item';
+import TaskList from '../components/task-list';
+
+interface TaskItemData {
+  id: string;
+  subject: string;
+  done: boolean;
+}
 
 const MainScreen = () => {
-  const [clicked, setClicked] = useState<boolean>(false);
-  const [subject, setSubject] = useState<string>('Task Item');
-  const [editing, setEditing] = useState<boolean>(false);
-  const handlePressCheckBox: () => void = useCallback(() => {
-    setClicked(prev => !prev);
+  const [data, setData] = useState(demo_data);
+  const [editingItemId, setEditingItemId] = useState<string | null>(null);
+
+  //set the checkbox
+  const handleToggleTaskItem = useCallback((item: TaskItemData) => {
+    //@ts-ignore
+    setData(prevData => {
+      const newData = [...prevData];
+      const index = prevData.indexOf(item);
+      newData[index] = {
+        ...item,
+        done: !item.done
+      };
+      return newData;
+    });
+  }, []);
+
+  //handle change in subject/task name
+  const handleChangeTaskItemSubject = useCallback(
+    (item: TaskItemData, newSubject: string) => {
+      //@ts-ignore
+      setData(prevData => {
+        const newData = [...prevData];
+        const index = prevData.indexOf(item);
+        newData[index] = {
+          ...item,
+          subject: newSubject
+        };
+        return newData;
+      });
+    },
+    []
+  );
+
+  //set the editing to false/or falsify the equality of editing id to data.id
+  const handleFinishEditingTaskItem = useCallback((_item: TaskItemData) => {
+    setEditingItemId(null);
+  }, []);
+
+  //set the editing to true/or truthify the equality of editing id to data.id
+  const handlePressTaskItemLabel = useCallback((item: TaskItemData) => {
+    setEditingItemId(item.id);
+  }, []);
+
+  //handle remove in list of selected id/subject/task name
+  const handleRemoveItem = useCallback((item: TaskItemData) => {
+    //@ts-ignore
+    setData(prevData => {
+      //removest the whole data of the selected task
+      const newData = prevData.filter(i => i !== item);
+      return newData;
+    });
   }, []);
 
   return (
@@ -31,14 +82,14 @@ const MainScreen = () => {
           <BoxShake />
         </Box>
 
-        <TaskItem
-          onToggleCheckBox={handlePressCheckBox}
-          isDone={clicked}
-          subject={subject}
-          isEditing={editing}
-          onPressLabel={() => setEditing(true)}
-          onFinishEditing={() => setEditing(false)}
-          onChangeSubject={setSubject}
+        <TaskList
+          data={data}
+          editingItemId={editingItemId}
+          onToggleItem={handleToggleTaskItem}
+          onChangeSubject={handleChangeTaskItemSubject}
+          onFinishEditing={handleFinishEditingTaskItem}
+          onPressLabel={handlePressTaskItemLabel}
+          onRemoveItem={handleRemoveItem}
         />
         <Box p={10} bg={useColorModeValue('red.500', 'yellow.500')}>
           <Text color={useColorModeValue('white', 'black')}>Hello</Text>
